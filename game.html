@@ -1,0 +1,2000 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>潮汕牛肉丸传奇 - 非遗手作体验</title>
+    <style>
+        :root {
+            --primary: #8B4513;
+            --primary-light: #D2691E;
+            --secondary: #F4A460;
+            --accent: #CD853F;
+            --bg: #FFF8DC;
+            --bg-dark: #FAEBD7;
+            --text: #3E2723;
+            --success: #228B22;
+            --warning: #FF8C00;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-dark) 100%);
+            min-height: 100vh;
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* 顶部导航 */
+        nav {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .logo {
+            font-size: 32px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 16px;
+        }
+
+        /* 游戏容器 */
+        .game-container {
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(139, 69, 19, 0.2);
+            margin-top: 30px;
+            overflow: hidden;
+        }
+
+        /* 进度条 */
+        .progress-bar {
+            display: flex;
+            justify-content: center;
+            padding: 20px;
+            background: var(--bg);
+            border-bottom: 2px solid var(--secondary);
+        }
+
+        .progress-step {
+            display: flex;
+            align-items: center;
+            margin: 0 20px;
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--secondary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .step-circle.active {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .step-circle.completed {
+            background: var(--success);
+        }
+
+        .step-name {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .step-name.active {
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        /* 游戏区域 */
+        .game-area {
+            padding: 40px;
+            min-height: 500px;
+        }
+
+        /* 开始界面 */
+        .start-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .start-screen h2 {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .intro-text {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text);
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: left;
+        }
+
+        .intro-text strong {
+            color: var(--primary);
+        }
+
+        .beef-ball-image {
+            font-size: 100px;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        /* 游戏标题 */
+        .game-title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .game-title h3 {
+            font-size: 24px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .game-title p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        /* 按钮 */
+        .btn {
+            padding: 15px 40px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin: 10px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(139, 69, 19, 0.5);
+        }
+
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+        }
+
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        /* 第一关：手锤牛肉丸 */
+        .pounding-area {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .level1-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            margin-bottom: 20px;
+            padding: 0 20px;
+        }
+
+        .level1-footer {
+            margin-top: 120px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pounding-board {
+            width: 350px;
+            height: 200px;
+            background: linear-gradient(145deg, #DEB887 0%, #D2B48C 100%);
+            border-radius: 10px;
+            position: relative;
+            margin: 100px 20px 20px;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,0.2), 0 10px 20px rgba(0,0,0,0.3);
+            cursor: pointer;
+            border: 5px solid #8B4513;
+        }
+
+        .meat-ball {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle at 30% 30%, #CD5C5C 0%, #8B0000 100%);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 8px 20px rgba(139, 0, 0, 0.4);
+            transition: transform 0.1s;
+            z-index: 5;
+        }
+
+        .hammer {
+            position: absolute;
+            width: 50px;
+            height: 160px;
+            top: 100%;
+            transition: transform 0.15s;
+            z-index: 10;
+            pointer-events: none;
+        }
+
+        .hammer-body {
+            width: 100%;
+            height: 120px;
+            background: linear-gradient(180deg, #8B4513 0%, #654321 50%, #5D4037 100%);
+            border-radius: 5px;
+            position: relative;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+        }
+
+        .hammer-head {
+            width: 60px;
+            height: 50px;
+            background: linear-gradient(180deg, #C0C0C0 0%, #808080 50%, #696969 100%);
+            border-radius: 5px;
+            position: absolute;
+            top: -20px;
+            left: -5px;
+            box-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+        }
+
+        .hammer-head::before {
+            content: '';
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 3px;
+        }
+
+        .hammer.left {
+            left: 50px;
+        }
+
+        .hammer.right {
+            right: 50px;
+        }
+
+        .hammer.hitting-left {
+            animation: hammerHitVertical 0.25s ease-out;
+        }
+
+        .hammer.hitting-right {
+            animation: hammerHitVertical 0.25s ease-out;
+        }
+
+        @keyframes hammerHitVertical {
+            0% { 
+                transform: translateY(0);
+            }
+            50% { 
+                transform: translateY(-100px);
+            }
+            100% { 
+                transform: translateY(0);
+            }
+        }
+
+        .meat-ball.hit {
+            animation: hit 0.15s ease-out;
+        }
+
+        @keyframes hit {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.3); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .meat-ball.perfect {
+            animation: perfectHit 0.2s ease-out;
+        }
+
+        @keyframes perfectHit {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.5) rotate(10deg); }
+            100% { transform: translate(-50%, -50%) scale(1.2); }
+        }
+
+        .hit-effect {
+            position: absolute;
+            font-size: 24px;
+            color: var(--success);
+            font-weight: bold;
+            pointer-events: none;
+            animation: floatUp 1s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-50px); }
+        }
+
+        .perfect-text {
+            color: #FFD700;
+            font-size: 32px;
+        }
+
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            max-width: 400px;
+            margin: 20px 0;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat-value {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .timer {
+            font-size: 48px;
+            color: var(--warning);
+            font-weight: bold;
+        }
+
+        .timer.warning {
+            color: #FF4500;
+            animation: pulse 0.5s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        /* 牛肉丸进度 */
+        .meat-progress {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+
+        .meat-icon {
+            font-size: 30px;
+            opacity: 0.3;
+            transition: all 0.3s;
+        }
+
+        .meat-icon.done {
+            opacity: 1;
+            animation: pop 0.5s ease-out;
+        }
+
+        @keyframes pop {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+
+        /* 第二关：煮汤 */
+        .cooking-area {
+            text-align: center;
+        }
+
+        .pot-container {
+            position: relative;
+            width: 300px;
+            height: 200px;
+            margin: 20px auto;
+        }
+
+        .pot {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #2F4F4F 0%, #1a1a1a 100%);
+            border-radius: 0 0 50% 50%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .soup {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            height: 60%;
+            background: linear-gradient(180deg, #FFD700 0%, #FFA500 100%);
+            border-radius: 0 0 45% 45%;
+            animation: bubble 2s infinite ease-in-out;
+        }
+
+        @keyframes bubble {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .pot-handle {
+            position: absolute;
+            top: 10px;
+            width: 40px;
+            height: 30px;
+            background: #1a1a1a;
+            border-radius: 5px;
+        }
+
+        .pot-handle.left {
+            left: -50px;
+        }
+
+        .pot-handle.right {
+            right: -50px;
+        }
+
+        .steam {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 30px;
+            animation: steam 1.5s infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes steam {
+            0% { transform: translateX(-50%) translateY(0); opacity: 0.7; }
+            100% { transform: translateX(-50%) translateY(-30px); opacity: 0; }
+        }
+
+        .temperature-gauge {
+            width: 100%;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .gauge-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .gauge-bar {
+            height: 30px;
+            background: linear-gradient(90deg, #87CEEB 0%, #FFD700 50%, #FF4500 100%);
+            border-radius: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .gauge-needle {
+            position: absolute;
+            top: -5px;
+            width: 6px;
+            height: 40px;
+            background: #333;
+            border-radius: 3px;
+            transition: left 0.3s;
+            left: 0%;
+        }
+
+        .gauge-needle::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #333;
+        }
+
+        .cooking-instructions {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .instruction-step {
+            display: flex;
+            align-items: center;
+            margin: 15px 0;
+            padding: 10px;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .instruction-step.active {
+            background: rgba(139, 69, 19, 0.1);
+            transform: scale(1.02);
+        }
+
+        .instruction-step.done {
+            opacity: 0.5;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .step-number.done {
+            background: var(--success);
+        }
+
+        /* 第三关：食材搭配 */
+        .pairing-area {
+            text-align: center;
+        }
+
+        .ingredients-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .ingredient {
+            background: white;
+            border: 3px solid var(--secondary);
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .ingredient:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .ingredient.selected {
+            border-color: var(--primary);
+            background: var(--bg);
+        }
+
+        .ingredient.correct {
+            border-color: var(--success);
+            background: rgba(34, 139, 34, 0.1);
+        }
+
+        .ingredient.wrong {
+            border-color: #FF4500;
+            background: rgba(255, 69, 0, 0.1);
+        }
+
+        .ingredient-icon {
+            font-size: 40px;
+            margin-bottom: 5px;
+        }
+
+        .ingredient-name {
+            font-size: 14px;
+            color: var(--text);
+        }
+
+        .pairing-bowl {
+            width: 200px;
+            height: 100px;
+            background: linear-gradient(180deg, #E0E0E0 0%, #BDBDBD 100%);
+            border-radius: 0 0 100px 100px;
+            margin: 20px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 10px;
+            gap: 5px;
+        }
+
+        .bowl-ingredient {
+            font-size: 24px;
+        }
+
+        .combo-hint {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 15px;
+            margin: 20px 0;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .combo-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .combo-list {
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* 结果界面 */
+        .result-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .result-score {
+            font-size: 80px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 20px 0;
+        }
+
+        .result-rank {
+            font-size: 48px;
+            margin: 20px 0;
+        }
+
+        .result-message {
+            font-size: 20px;
+            color: #666;
+            margin: 20px 0;
+        }
+
+        .result-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+        }
+
+        .result-stat {
+            background: var(--bg);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .result-stat-icon {
+            font-size: 40px;
+            margin-bottom: 10px;
+        }
+
+        .result-stat-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .result-stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 提示信息 */
+        .tip-box {
+            background: linear-gradient(135deg, #FFF9C4 0%, #FFECB3 100%);
+            border-left: 4px solid var(--warning);
+            padding: 15px 20px;
+            border-radius: 0 10px 10px 0;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .tip-title {
+            font-weight: bold;
+            color: var(--warning);
+            margin-bottom: 5px;
+        }
+
+        .tip-content {
+            font-size: 14px;
+            color: #666;
+        }
+
+        /* 文化知识卡片 */
+        .culture-card {
+            background: linear-gradient(135deg, #FFF8E1 0%, #FFECB3 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 20px 0;
+            text-align: left;
+            border: 2px solid var(--secondary);
+        }
+
+        .culture-title {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .culture-content {
+            font-size: 15px;
+            line-height: 1.8;
+            color: var(--text);
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .progress-step {
+                margin: 0 10px;
+            }
+            
+            .step-name {
+                display: none;
+            }
+            
+            .game-area {
+                padding: 20px;
+            }
+            
+            .ingredients-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .result-stats {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* 动画效果 */
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+
+        /* 连击效果 */
+        .combo-display {
+            position: fixed;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            text-align: center;
+            pointer-events: none;
+        }
+
+        .combo-count {
+            font-size: 48px;
+            font-weight: bold;
+            color: #FFD700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .combo-label {
+            font-size: 18px;
+            color: #FFA500;
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        /* 撒花动画 */
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            top: -10px;
+            animation: confetti-fall linear forwards;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(720deg);
+                opacity: 0;
+            }
+        }
+
+        /* 庆祝弹窗 */
+        .celebration-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .celebration-content {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            max-width: 400px;
+            width: 90%;
+            animation: bounceIn 0.5s ease-out;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .celebration-icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+            animation: bounce 0.6s ease-in-out infinite;
+        }
+
+        .celebration-title {
+            font-size: 28px;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        .celebration-text {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .celebration-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--bg);
+            border-radius: 15px;
+        }
+
+        .celebration-stat {
+            text-align: center;
+        }
+
+        .celebration-stat-value {
+            font-size: 28px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .celebration-stat-label {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .celebration-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-celebrate {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-finish {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            color: white;
+        }
+
+        .btn-continue {
+            background: var(--secondary);
+            color: white;
+        }
+
+        .btn-celebrate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">🥩 潮汕牛肉丸传奇</div>
+        <div class="subtitle">非遗手作体验游戏</div>
+    </nav>
+
+    <div class="container">
+        <div class="game-container">
+            <!-- 进度条 -->
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-step">
+                    <div class="step-circle active" id="step1">1</div>
+                    <span class="step-name active">手锤牛肉丸</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle" id="step2">2</div>
+                    <span class="step-name">煮汤秘籍</span>
+                </div>
+                <div class="progress-step">
+                    <div class="step-circle" id="step3">3</div>
+                    <span class="step-name">食材搭配</span>
+                </div>
+            </div>
+
+            <!-- 游戏区域 -->
+            <div class="game-area" id="gameArea">
+                <!-- 开始界面 -->
+                <div class="start-screen" id="startScreen">
+                    <div class="beef-ball-image">🍡</div>
+                    <h2>欢迎来到潮汕牛肉丸的世界</h2>
+                    
+                    <div class="intro-text">
+                        <p><strong>潮汕牛肉丸</strong>是广东省潮汕地区的传统美食，起源于<span style="color: #8B4513;">潮州市</span>，至今已有<span style="color: #CD853F;">数百年的历史</span>。</p>
+                        <br>
+                        <p>2009年，潮汕牛肉丸被列入<span style="color: #FF8C00;">汕头市非物质文化遗产</span>名录。制作一颗正宗的潮汕牛肉丸，需要经过：</p>
+                        <br>
+                        <p>🥩 <strong>选肉</strong> - 选用新鲜的黄牛后腿肉</p>
+                        <p>🔨 <strong>捶打</strong> - 用特制铁锤手工捶打至肉浆</p>
+                        <p>🍜 <strong>煮制</strong> - 放入80℃左右的温水中文火慢煮</p>
+                        <p>🍲 <strong>搭配</strong> - 配上沙茶酱或辣椒酱享用</p>
+                    </div>
+
+                    <div class="culture-card">
+                        <div class="culture-title">📜 非遗小知识</div>
+                        <div class="culture-content">
+                            传统潮汕牛肉丸制作技艺，体现了潮汕人对美食的极致追求。每一颗牛肉丸都需要经过<span style="color: #8B4513;">数千次的捶打</span>，才能让肉质达到最佳的口感——<span style="color: #FF8C00;">弹牙多汁、鲜嫩可口</span>。
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="startGame()">开始体验</button>
+                </div>
+
+                <!-- 第一关：手锤牛肉丸 -->
+                <div class="pounding-area hidden" id="level1">
+                    <div class="game-title">
+                        <h3>🔨 第一关：千锤百炼</h3>
+                        <p>快速点击牛肉丸或按空格键，模拟双手持锤捶打！</p>
+                    </div>
+
+                    <div class="level1-header">
+                        <div class="timer" id="timer1">30</div>
+                        <div class="game-stats">
+                            <div class="stat">
+                                <div class="stat-value" id="hitCount">0</div>
+                                <div class="stat-label">捶打次数</div>
+                            </div>
+                            <div class="stat">
+                                <div class="stat-value" id="perfectCount">0</div>
+                                <div class="stat-label">完美时机</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pounding-board" id="poundingBoard" onclick="hitBall(event)">
+                        <div class="hammer left" id="hammerLeft">
+                            <div class="hammer-body"></div>
+                            <div class="hammer-head"></div>
+                        </div>
+                        <div class="hammer right" id="hammerRight">
+                            <div class="hammer-body"></div>
+                            <div class="hammer-head"></div>
+                        </div>
+                        <div class="meat-ball" id="meatBall"></div>
+                    </div>
+
+                    <div class="level1-footer">
+                        <div class="meat-progress" id="meatProgress">
+                            <span class="meat-icon">🍡</span>
+                            <span class="meat-icon">🍡</span>
+                            <span class="meat-icon">🍡</span>
+                            <span class="meat-icon">🍡</span>
+                            <span class="meat-icon">🍡</span>
+                        </div>
+
+                        <div class="tip-box">
+                            <div class="tip-title">💡 非遗技艺</div>
+                            <div class="tip-content">传统潮汕牛肉丸制作中，师傅双手各持一把3-4斤重的方形铁锤，在厚实木砧上垂直捶打，力度需"重而不猛"，持续捶打30分钟以上才能制成！</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 第二关：煮汤 -->
+                <div class="cooking-area hidden" id="level2">
+                    <div class="game-title">
+                        <h3>🍲 第二关：火候秘籍</h3>
+                        <p>掌握煮汤火候，做出最鲜美的牛肉丸汤！</p>
+                    </div>
+
+                    <div class="pot-container">
+                        <div class="pot">
+                            <div class="soup" id="soup"></div>
+                        </div>
+                        <div class="pot-handle left"></div>
+                        <div class="pot-handle right"></div>
+                        <div class="steam" id="steam">💨</div>
+                    </div>
+
+                    <div class="temperature-gauge">
+                        <div class="gauge-label">
+                            <span>冷水</span>
+                            <span>最佳温度 80℃</span>
+                            <span>沸腾</span>
+                        </div>
+                        <div class="gauge-bar">
+                            <div class="gauge-needle" id="gaugeNeedle"></div>
+                        </div>
+                    </div>
+
+                    <div class="cooking-instructions">
+                        <div class="instruction-step" id="cookStep1">
+                            <div class="step-number">1</div>
+                            <div>冷水下锅 - 先把牛肉丸放入冷水中</div>
+                        </div>
+                        <div class="instruction-step" id="cookStep2">
+                            <div class="step-number">2</div>
+                            <div>小火慢加热 - 保持80℃左右的温度</div>
+                        </div>
+                        <div class="instruction-step" id="cookStep3">
+                            <div class="step-number">3</div>
+                            <div>文火煮制约8-10分钟 - 让牛肉丸充分吸收汤汁</div>
+                        </div>
+                        <div class="instruction-step" id="cookStep4">
+                            <div class="step-number">4</div>
+                            <div>起锅装碗 - 撒上葱花和芹菜</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-secondary" id="heatBtn" onclick="adjustHeat('up')">⬆️ 升温</button>
+                    <button class="btn btn-secondary" id="coolBtn" onclick="adjustHeat('down')">⬇️ 降温</button>
+                    <button class="btn btn-success" id="nextStepBtn" onclick="completeStep()">完成此步</button>
+
+                    <div class="tip-box">
+                        <div class="tip-title">💡 关键技巧</div>
+                        <div class="tip-content">温度控制在70-90℃之间为最佳，过高会让牛肉丸变硬，过低则无法煮熟。</div>
+                    </div>
+                </div>
+
+                <!-- 第三关：食材搭配 -->
+                <div class="pairing-area hidden" id="level3">
+                    <div class="game-title">
+                        <h3>🥗 第三关：美食搭配</h3>
+                        <p>选择食材搭配，需要包含牛肉丸和至少一种搭配食材！</p>
+                    </div>
+
+                    <div class="combo-hint">
+                        <div class="combo-title">🍜 经典搭配推荐</div>
+                        <div class="combo-list">
+                            • 沙茶酱 + 牛肉丸 = 经典潮汕味<br>
+                            • 牛肉丸 + 粿条 = 牛肉丸粿条汤<br>
+                            • 牛肉丸 + 普宁豆干 = 地方特色<br>
+                            • 牛肉丸 + 酸梅酱 = 开胃解腻
+                        </div>
+                    </div>
+
+                    <div class="pairing-bowl" id="pairingBowl">
+                        <span style="color: #999; font-size: 14px;">点击选择食材放入碗中</span>
+                    </div>
+
+                    <div class="ingredients-grid" id="ingredientsGrid">
+                        <!-- 食材会动态生成 -->
+                    </div>
+
+                    <div class="game-stats">
+                        <div class="stat">
+                            <div class="stat-value" id="correctPairs">0</div>
+                            <div class="stat-label">正确搭配</div>
+                        </div>
+                        <div class="stat">
+                            <div class="stat-value" id="totalAttempts">0</div>
+                            <div class="stat-label">尝试次数</div>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" id="checkPairingBtn" onclick="checkPairing()">检查搭配</button>
+                    <button class="btn btn-success hidden" id="finishGameBtn" onclick="showResults()">查看成绩</button>
+                </div>
+
+                <!-- 结果界面 -->
+                <div class="result-screen hidden" id="resultScreen">
+                    <div class="beef-ball-image">🏆</div>
+                    <h2>恭喜完成体验！</h2>
+                    
+                    <div class="result-score" id="totalScore">0</div>
+                    <div class="result-rank" id="rank">🏅 非遗传承人</div>
+                    <div class="result-message" id="resultMessage">你已经掌握了潮汕牛肉丸的制作技艺！</div>
+
+                    <div class="result-stats">
+                        <div class="result-stat">
+                            <div class="result-stat-icon">🔨</div>
+                            <div class="result-stat-value" id="finalHits">0</div>
+                            <div class="result-stat-label">总捶打次数</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-icon">🎯</div>
+                            <div class="result-stat-value" id="finalPerfect">0</div>
+                            <div class="result-stat-label">完美时机</div>
+                        </div>
+                        <div class="result-stat">
+                            <div class="result-stat-icon">🍽️</div>
+                            <div class="result-stat-value" id="finalPairs">0</div>
+                            <div class="result-stat-label">正确搭配</div>
+                        </div>
+                    </div>
+
+                    <div class="culture-card">
+                        <div class="culture-title">📜 非遗传承寄语</div>
+                        <div class="culture-content" id="传承寄语">
+                            感谢你体验潮汕牛肉丸的制作过程！每一颗牛肉丸都承载着潮汕人民的智慧和匠心。希望你能将这份非遗文化传承下去，让更多人了解和喜爱潮汕美食！
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="restartGame()">再玩一次</button>
+                    <button class="btn btn-secondary" onclick="shareResult()">分享成果</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 连击显示 -->
+    <div class="combo-display hidden" id="comboDisplay">
+        <div class="combo-count" id="comboCount">0</div>
+        <div class="combo-label">连击!</div>
+    </div>
+
+    <!-- 庆祝弹窗 -->
+    <div class="celebration-modal hidden" id="celebrationModal">
+        <div class="celebration-content">
+            <div class="celebration-icon">🎉</div>
+            <div class="celebration-title">恭喜完成搭配！</div>
+            <div class="celebration-text">你已经成功完成了3组美味的牛肉丸搭配，太棒了！</div>
+            <div class="celebration-stats">
+                <div class="celebration-stat">
+                    <div class="celebration-stat-value" id="celebrationHits">0</div>
+                    <div class="celebration-stat-label">捶打次数</div>
+                </div>
+                <div class="celebration-stat">
+                    <div class="celebration-stat-value" id="celebrationPerfect">0</div>
+                    <div class="celebration-stat-label">完美时机</div>
+                </div>
+                <div class="celebration-stat">
+                    <div class="celebration-stat-value" id="celebrationPairs">0</div>
+                    <div class="celebration-stat-label">正确搭配</div>
+                </div>
+            </div>
+            <div class="celebration-buttons">
+                <button class="btn-celebrate btn-finish" onclick="finishGame()">结束游戏</button>
+                <button class="btn-celebrate btn-continue" onclick="continueGame()">继续搭配</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 游戏状态
+        let gameState = {
+            currentLevel: 0,
+            score: 0,
+            level1: {
+                hits: 0,
+                perfect: 0,
+                timeLeft: 30,
+                combo: 0,
+                timer: null,
+                isPlaying: false,
+                currentHammer: 'left'
+            },
+            level2: {
+                temperature: 20,
+                currentStep: 1,
+                stepsCompleted: [],
+                timer: null
+            },
+            level3: {
+                selected: [],
+                correctPairs: 0,
+                attempts: 0,
+                requiredPairs: 3
+            }
+        };
+
+        // 食材数据
+        const ingredients = [
+            { id: 1, name: '牛肉丸', icon: '🍡', correct: true, group: 'main' },
+            { id: 2, name: '沙茶酱', icon: '🫕', correct: true, group: 'sauce' },
+            { id: 3, name: '粿条', icon: '🍜', correct: true, group: 'noodle' },
+            { id: 4, name: '普宁豆干', icon: '🧈', correct: true, group: 'side' },
+            { id: 5, name: '酸梅酱', icon: '🍑', correct: true, group: 'sauce' },
+            { id: 6, name: '芹菜', icon: '🌿', correct: true, group: 'garnish' },
+            { id: 7, name: '生菜', icon: '🥬', correct: false, group: 'bad' },
+            { id: 8, name: '番茄', icon: '🍅', correct: false, group: 'bad' }
+        ];
+
+        // 初始化游戏
+        function init() {
+            renderIngredients();
+        }
+
+        // 开始游戏
+        function startGame() {
+            document.getElementById('startScreen').classList.add('hidden');
+            gameState.currentLevel = 1;
+            startLevel1();
+        }
+
+        // 第一关：手锤牛肉丸
+        function startLevel1() {
+            updateProgressBar(1);
+            document.getElementById('level1').classList.remove('hidden');
+            document.getElementById('level1').classList.add('fade-in');
+            
+            gameState.level1.isPlaying = true;
+            
+            document.addEventListener('keydown', handleKeyPress);
+            
+            gameState.level1.timer = setInterval(() => {
+                gameState.level1.timeLeft--;
+                updateTimer();
+                
+                if (gameState.level1.timeLeft <= 0) {
+                    endLevel1();
+                }
+            }, 1000);
+        }
+
+        function handleKeyPress(e) {
+            if (e.code === 'Space' && gameState.currentLevel === 1) {
+                e.preventDefault();
+                const ball = document.getElementById('meatBall');
+                const board = document.getElementById('poundingBoard');
+                hitBallWithSpace(ball, board);
+            }
+        }
+
+        function hitBallWithSpace(ball, board) {
+            if (!gameState.level1.isPlaying) return;
+            
+            const hammerLeft = document.getElementById('hammerLeft');
+            const hammerRight = document.getElementById('hammerRight');
+            
+            const currentHammer = gameState.level1.currentHammer;
+            
+            if (currentHammer === 'left') {
+                hammerLeft.classList.remove('hitting-left', 'hitting-right');
+                void hammerLeft.offsetWidth;
+                hammerLeft.classList.add('hitting-left');
+                
+                setTimeout(() => {
+                    hammerLeft.classList.remove('hitting-left');
+                }, 250);
+            } else {
+                hammerRight.classList.remove('hitting-left', 'hitting-right');
+                void hammerRight.offsetWidth;
+                hammerRight.classList.add('hitting-right');
+                
+                setTimeout(() => {
+                    hammerRight.classList.remove('hitting-right');
+                }, 250);
+            }
+            
+            gameState.level1.currentHammer = currentHammer === 'left' ? 'right' : 'left';
+            
+            const isPerfect = Math.random() < 0.3;
+            
+            gameState.level1.hits++;
+            document.getElementById('hitCount').textContent = gameState.level1.hits;
+            
+            if (isPerfect) {
+                gameState.level1.perfect++;
+                gameState.level1.combo++;
+                document.getElementById('perfectCount').textContent = gameState.level1.perfect;
+                ball.classList.add('perfect');
+                showHitEffect(board, 'PERFECT!', 'perfect-text');
+                
+                if (gameState.level1.combo >= 3) {
+                    showCombo();
+                }
+            } else {
+                gameState.level1.combo = 0;
+                ball.classList.add('hit');
+                showHitEffect(board, '好!');
+            }
+            
+            setTimeout(() => {
+                ball.classList.remove('hit', 'perfect');
+            }, 200);
+            
+            updateMeatProgress();
+        }
+
+        function updateTimer() {
+            const timerEl = document.getElementById('timer1');
+            timerEl.textContent = gameState.level1.timeLeft;
+            
+            if (gameState.level1.timeLeft <= 10) {
+                timerEl.classList.add('warning');
+            }
+        }
+
+        function hitBall(event) {
+            if (!gameState.level1.isPlaying) return;
+            
+            const ball = document.getElementById('meatBall');
+            const board = document.getElementById('poundingBoard');
+            const hammerLeft = document.getElementById('hammerLeft');
+            const hammerRight = document.getElementById('hammerRight');
+            
+            const currentHammer = gameState.level1.currentHammer;
+            
+            if (currentHammer === 'left') {
+                hammerLeft.classList.remove('hitting-left', 'hitting-right');
+                void hammerLeft.offsetWidth;
+                hammerLeft.classList.add('hitting-left');
+                
+                setTimeout(() => {
+                    hammerLeft.classList.remove('hitting-left');
+                }, 250);
+            } else {
+                hammerRight.classList.remove('hitting-left', 'hitting-right');
+                void hammerRight.offsetWidth;
+                hammerRight.classList.add('hitting-right');
+                
+                setTimeout(() => {
+                    hammerRight.classList.remove('hitting-right');
+                }, 250);
+            }
+            
+            gameState.level1.currentHammer = currentHammer === 'left' ? 'right' : 'left';
+            
+            const isPerfect = Math.random() < 0.3;
+            
+            gameState.level1.hits++;
+            document.getElementById('hitCount').textContent = gameState.level1.hits;
+            
+            if (isPerfect) {
+                gameState.level1.perfect++;
+                gameState.level1.combo++;
+                document.getElementById('perfectCount').textContent = gameState.level1.perfect;
+                ball.classList.add('perfect');
+                
+                showHitEffect(board, 'PERFECT!', 'perfect-text');
+                
+                if (gameState.level1.combo >= 3) {
+                    showCombo();
+                }
+            } else {
+                gameState.level1.combo = 0;
+                ball.classList.add('hit');
+                showHitEffect(board, '好!');
+            }
+            
+            setTimeout(() => {
+                ball.classList.remove('hit', 'perfect');
+            }, 200);
+            
+            updateMeatProgress();
+        }
+
+        function showHitEffect(container, text, className = '') {
+            const effect = document.createElement('div');
+            effect.className = `hit-effect ${className}`;
+            effect.textContent = text;
+            effect.style.left = '50%';
+            effect.style.top = '50%';
+            container.appendChild(effect);
+            
+            setTimeout(() => {
+                effect.remove();
+            }, 1000);
+        }
+
+        function showCombo() {
+            const comboDisplay = document.getElementById('comboDisplay');
+            const comboCount = document.getElementById('comboCount');
+            
+            comboCount.textContent = gameState.level1.combo;
+            comboDisplay.classList.remove('hidden');
+            
+            setTimeout(() => {
+                comboDisplay.classList.add('hidden');
+            }, 1000);
+        }
+
+        function updateMeatProgress() {
+            const progress = gameState.level1.hits;
+            const icons = document.querySelectorAll('.meat-icon');
+            const thresholds = [10, 30, 60, 100, 150];
+            
+            icons.forEach((icon, index) => {
+                if (progress >= thresholds[index]) {
+                    icon.classList.add('done');
+                }
+            });
+        }
+
+        function endLevel1() {
+            clearInterval(gameState.level1.timer);
+            gameState.level1.isPlaying = false;
+            
+            document.removeEventListener('keydown', handleKeyPress);
+            
+            // 计算第一关得分
+            const level1Score = gameState.level1.hits * 2 + gameState.level1.perfect * 10;
+            gameState.score += level1Score;
+            
+            // 延迟进入下一关
+            setTimeout(() => {
+                document.getElementById('level1').classList.remove('fade-in');
+                document.getElementById('level1').classList.add('hidden');
+                startLevel2();
+            }, 1500);
+        }
+
+        // 第二关：煮汤
+        function startLevel2() {
+            gameState.currentLevel = 2;
+            updateProgressBar(2);
+            document.getElementById('level2').classList.remove('hidden');
+            document.getElementById('level2').classList.add('fade-in');
+            
+            // 启动温度变化
+            gameState.level2.timer = setInterval(() => {
+                // 缓慢降温
+                if (gameState.level2.temperature > 20) {
+                    gameState.level2.temperature -= 0.5;
+                }
+                updateTemperatureGauge();
+                checkTemperature();
+            }, 100);
+        }
+
+        function adjustHeat(direction) {
+            if (direction === 'up') {
+                gameState.level2.temperature = Math.min(100, gameState.level2.temperature + 10);
+            } else {
+                gameState.level2.temperature = Math.max(20, gameState.level2.temperature - 10);
+            }
+            updateTemperatureGauge();
+            checkTemperature();
+        }
+
+        function updateTemperatureGauge() {
+            const needle = document.getElementById('gaugeNeedle');
+            const temp = gameState.level2.temperature;
+            needle.style.left = `${temp}%`;
+            
+            // 更新蒸汽效果
+            const steam = document.getElementById('steam');
+            if (temp > 80) {
+                steam.style.opacity = '0.9';
+            } else if (temp > 50) {
+                steam.style.opacity = '0.6';
+            } else {
+                steam.style.opacity = '0.3';
+            }
+        }
+
+        function checkTemperature() {
+            const currentStep = gameState.level2.currentStep;
+            const temp = gameState.level2.temperature;
+            
+            // 根据步骤检查温度是否合适
+            if (currentStep === 2 && (temp < 70 || temp > 90)) {
+                document.getElementById('cookStep2').classList.add('shake');
+                setTimeout(() => {
+                    document.getElementById('cookStep2').classList.remove('shake');
+                }, 500);
+            }
+        }
+
+        function completeStep() {
+            const currentStep = gameState.level2.currentStep;
+            
+            // 检查温度是否合适（降低难度，放宽范围）
+            let isValid = true;
+            let tempMessage = '';
+            
+            if (currentStep === 1) {
+                isValid = true;
+            } else if (currentStep === 2) {
+                isValid = gameState.level2.temperature >= 50 && gameState.level2.temperature <= 95;
+                if (!isValid) tempMessage = '温度需要在50-95℃之间';
+            } else if (currentStep === 3) {
+                isValid = gameState.level2.temperature >= 50 && gameState.level2.temperature <= 95;
+                if (!isValid) tempMessage = '温度需要在50-95℃之间';
+            } else if (currentStep === 4) {
+                isValid = true;
+            }
+            
+            if (isValid) {
+                document.getElementById(`cookStep${currentStep}`).classList.add('done');
+                document.getElementById(`cookStep${currentStep}`).querySelector('.step-number').classList.add('done');
+                
+                gameState.level2.stepsCompleted.push(currentStep);
+                
+                if (currentStep < 4) {
+                    gameState.level2.currentStep++;
+                    document.getElementById(`cookStep${gameState.level2.currentStep}`).classList.add('active');
+                    
+                    // 自动调整温度到合适范围
+                    if (gameState.level2.currentStep === 3) {
+                        gameState.level2.temperature = 75;
+                        updateTemperatureGauge();
+                    }
+                    
+                    if (gameState.level2.currentStep === 4) {
+                        document.getElementById('nextStepBtn').textContent = '完成烹饪';
+                    }
+                } else {
+                    endLevel2();
+                }
+            } else {
+                alert(`温度不合适！${tempMessage}，请调整温度后再继续。`);
+            }
+        }
+
+        function endLevel2() {
+            clearInterval(gameState.level2.timer);
+            
+            // 计算第二关得分
+            const stepScore = gameState.level2.stepsCompleted.length * 25;
+            gameState.score += stepScore;
+            
+            setTimeout(() => {
+                document.getElementById('level2').classList.add('hidden');
+                startLevel3();
+            }, 1500);
+        }
+
+        // 第三关：食材搭配
+        function startLevel3() {
+            gameState.currentLevel = 3;
+            updateProgressBar(3);
+            document.getElementById('level3').classList.remove('hidden');
+            document.getElementById('level3').classList.add('fade-in');
+        }
+
+        function renderIngredients() {
+            const grid = document.getElementById('ingredientsGrid');
+            grid.innerHTML = '';
+            
+            ingredients.forEach(ing => {
+                const div = document.createElement('div');
+                div.className = 'ingredient';
+                div.dataset.id = ing.id;
+                div.dataset.group = ing.group;
+                div.dataset.correct = ing.correct;
+                div.innerHTML = `
+                    <div class="ingredient-icon">${ing.icon}</div>
+                    <div class="ingredient-name">${ing.name}</div>
+                `;
+                div.onclick = () => selectIngredient(div, ing);
+                grid.appendChild(div);
+            });
+        }
+
+        function selectIngredient(element, ingredient) {
+            if (element.classList.contains('selected')) {
+                element.classList.remove('selected');
+                gameState.level3.selected = gameState.level3.selected.filter(id => id !== ingredient.id);
+            } else if (gameState.level3.selected.length < 4) {
+                element.classList.add('selected');
+                gameState.level3.selected.push(ingredient.id);
+            }
+            
+            updatePairingBowl();
+        }
+
+        function updatePairingBowl() {
+            const bowl = document.getElementById('pairingBowl');
+            bowl.innerHTML = '';
+            
+            if (gameState.level3.selected.length === 0) {
+                bowl.innerHTML = '<span style="color: #999; font-size: 14px;">点击选择食材放入碗中</span>';
+            } else {
+                gameState.level3.selected.forEach(id => {
+                    const ing = ingredients.find(i => i.id === id);
+                    const span = document.createElement('span');
+                    span.className = 'bowl-ingredient';
+                    span.textContent = ing.icon;
+                    bowl.appendChild(span);
+                });
+            }
+        }
+
+        function checkPairing() {
+            const selected = gameState.level3.selected.map(id => ingredients.find(i => i.id === id));
+            
+            // 必须包含牛肉丸
+            if (!selected.some(i => i.group === 'main')) {
+                alert('请先选择牛肉丸！');
+                return;
+            }
+            
+            // 检查搭配是否合理
+            let isCorrect = false;
+            let comboName = '';
+            
+            // 经典搭配1：牛肉丸 + 沙茶酱
+            if (selected.some(i => i.group === 'main') && selected.some(i => i.group === 'sauce')) {
+                isCorrect = true;
+                comboName = '经典潮汕味！';
+            }
+            // 经典搭配2：牛肉丸 + 粿条
+            else if (selected.some(i => i.group === 'main') && selected.some(i => i.group === 'noodle')) {
+                isCorrect = true;
+                comboName = '牛肉丸粿条汤！';
+            }
+            // 经典搭配3：牛肉丸 + 豆干
+            else if (selected.some(i => i.group === 'main') && selected.some(i => i.group === 'side')) {
+                isCorrect = true;
+                comboName = '潮汕特色小吃！';
+            }
+            // 搭配4：牛肉丸 + 芹菜（点缀）
+            else if (selected.some(i => i.group === 'main') && selected.some(i => i.group === 'garnish')) {
+                isCorrect = true;
+                comboName = '鲜香可口！';
+            }
+            
+            gameState.level3.attempts++;
+            document.getElementById('totalAttempts').textContent = gameState.level3.attempts;
+            
+            if (isCorrect) {
+                gameState.level3.correctPairs++;
+                document.getElementById('correctPairs').textContent = gameState.level3.correctPairs;
+                
+                // 显示正确效果
+                document.querySelectorAll('.ingredient.selected').forEach(el => {
+                    el.classList.add('correct');
+                });
+                
+                // 显示搭配名称
+                if (comboName) {
+                    const successMsg = document.createElement('div');
+                    successMsg.className = 'hit-effect perfect-text';
+                    successMsg.textContent = comboName;
+                    successMsg.style.position = 'fixed';
+                    successMsg.style.top = '50%';
+                    successMsg.style.left = '50%';
+                    successMsg.style.transform = 'translate(-50%, -50%)';
+                    successMsg.style.fontSize = '36px';
+                    document.body.appendChild(successMsg);
+                    setTimeout(() => successMsg.remove(), 1500);
+                }
+                
+                // 完成一组搭配就显示庆祝弹窗
+                if (gameState.level3.correctPairs >= 1) {
+                    setTimeout(showCelebration, 1000);
+                } else {
+                    setTimeout(resetSelection, 1500);
+                }
+            } else {
+                // 显示错误效果
+                document.querySelectorAll('.ingredient.selected').forEach(el => {
+                    el.classList.add('wrong');
+                    el.classList.add('shake');
+                });
+                setTimeout(resetSelection, 1500);
+            }
+        }
+
+        function resetSelection() {
+            document.querySelectorAll('.ingredient').forEach(el => {
+                el.classList.remove('selected', 'correct', 'wrong', 'shake');
+            });
+            gameState.level3.selected = [];
+            updatePairingBowl();
+        }
+
+        // 撒花效果
+        function fireConfetti() {
+            const colors = ['#FFD700', '#FF4500', '#FF69B4', '#00CED1', '#32CD32', '#9370DB', '#FF6347', '#87CEEB'];
+            const container = document.body;
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.left = Math.random() * 100 + '%';
+                confetti.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                confetti.style.animationDelay = Math.random() * 2 + 's';
+                confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                container.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+
+        // 显示庆祝弹窗
+        function showCelebration() {
+            fireConfetti();
+            
+            document.getElementById('celebrationHits').textContent = gameState.level1.hits;
+            document.getElementById('celebrationPerfect').textContent = gameState.level1.perfect;
+            document.getElementById('celebrationPairs').textContent = gameState.level3.correctPairs;
+            
+            document.getElementById('celebrationModal').classList.remove('hidden');
+        }
+
+        // 结束游戏
+        function finishGame() {
+            document.getElementById('celebrationModal').classList.add('hidden');
+            document.getElementById('level3').classList.add('hidden');
+            document.getElementById('resultScreen').classList.remove('hidden');
+            document.getElementById('resultScreen').classList.add('fade-in');
+            
+            const pairingScore = gameState.level3.correctPairs * 30;
+            gameState.score += pairingScore;
+            
+            document.getElementById('totalScore').textContent = gameState.score;
+            document.getElementById('finalHits').textContent = gameState.level1.hits;
+            document.getElementById('finalPerfect').textContent = gameState.level1.perfect;
+            document.getElementById('finalPairs').textContent = gameState.level3.correctPairs;
+            
+            let rank = '';
+            let message = '';
+            let 寄语 = '';
+            
+            if (gameState.score >= 500) {
+                rank = '👨‍🍳 非遗大师';
+                message = '太棒了！你已经完美掌握了潮汕牛肉丸的制作技艺！';
+                寄语 = '你展现了非凡的天赋！作为未来的非遗传承人，希望你能将这份匠心精神发扬光大，让潮汕牛肉丸的美味传遍世界！';
+            } else if (gameState.score >= 350) {
+                rank = '🏅 非遗传承人';
+                message = '非常好！你已经掌握了潮汕牛肉丸的制作技艺！';
+                寄语 = '感谢你体验潮汕牛肉丸的制作过程！每一颗牛肉丸都承载着潮汕人民的智慧和匠心。希望你能将这份非遗文化传承下去！';
+            } else if (gameState.score >= 200) {
+                rank = '🥉 美食学徒';
+                message = '不错的开始！继续努力，你也能成为美食达人！';
+                寄语 = '潮汕牛肉丸的制作技艺需要长期练习，但只要用心，你一定能掌握！';
+            } else {
+                rank = '🍡 初学者';
+                message = '继续加油！多尝试几次，你会越来越熟练！';
+                寄语 = '别灰心！潮汕牛肉丸的美味值得你反复品味和学习。';
+            }
+            
+            document.getElementById('rank').textContent = rank;
+            document.getElementById('resultMessage').textContent = message;
+            document.getElementById('传承寄语').textContent = 寄语;
+            
+            updateProgressBar(4);
+        }
+
+        // 继续搭配
+        function continueGame() {
+            document.getElementById('celebrationModal').classList.add('hidden');
+            
+            gameState.level3.correctPairs = 0;
+            gameState.level3.attempts = 0;
+            
+            document.getElementById('correctPairs').textContent = '0';
+            document.getElementById('totalAttempts').textContent = '0';
+            
+            resetSelection();
+            
+            gameState.level3.requiredPairs = 3;
+        }
+
+        // 显示结果
+        function showResults() {
+            document.getElementById('level3').classList.add('hidden');
+            document.getElementById('resultScreen').classList.remove('hidden');
+            document.getElementById('resultScreen').classList.add('fade-in');
+            
+            // 计算总分
+            const pairingScore = gameState.level3.correctPairs * 30;
+            gameState.score += pairingScore;
+            
+            document.getElementById('totalScore').textContent = gameState.score;
+            document.getElementById('finalHits').textContent = gameState.level1.hits;
+            document.getElementById('finalPerfect').textContent = gameState.level1.perfect;
+            document.getElementById('finalPairs').textContent = gameState.level3.correctPairs;
+            
+            // 评级
+            let rank = '';
+            let message = '';
+            let 寄语 = '';
+            
+            if (gameState.score >= 500) {
+                rank = '👨‍🍳 非遗大师';
+                message = '太棒了！你已经完美掌握了潮汕牛肉丸的制作技艺！';
+                寄语 = '你展现了非凡的天赋！作为未来的非遗传承人，希望你能将这份匠心精神发扬光大，让潮汕牛肉丸的美味传遍世界！';
+            } else if (gameState.score >= 350) {
+                rank = '🏅 非遗传承人';
+                message = '非常好！你已经掌握了潮汕牛肉丸的制作技艺！';
+                寄语 = '感谢你体验潮汕牛肉丸的制作过程！每一颗牛肉丸都承载着潮汕人民的智慧和匠心。希望你能将这份非遗文化传承下去！';
+            } else if (gameState.score >= 200) {
+                rank = '🥉 美食学徒';
+                message = '不错的开始！继续努力，你也能成为美食达人！';
+                寄语 = '潮汕牛肉丸的制作技艺需要长期练习，但只要用心，你一定能掌握！';
+            } else {
+                rank = '🍡 初学者';
+                message = '继续加油！多尝试几次，你会越来越熟练！';
+                寄语 = '别灰心！潮汕牛肉丸的美味值得你反复品味和学习。';
+            }
+            
+            document.getElementById('rank').textContent = rank;
+            document.getElementById('resultMessage').textContent = message;
+            document.getElementById('传承寄语').textContent = 寄语;
+            
+            updateProgressBar(4);
+        }
+
+        // 更新进度条
+        function updateProgressBar(step) {
+            for (let i = 1; i <= 3; i++) {
+                const circle = document.getElementById(`step${i}`);
+                const name = circle.nextElementSibling;
+                
+                circle.classList.remove('active', 'completed');
+                name.classList.remove('active');
+                
+                if (i < step) {
+                    circle.classList.add('completed');
+                    circle.textContent = '✓';
+                } else if (i === step) {
+                    circle.classList.add('active');
+                    name.classList.add('active');
+                }
+            }
+        }
+
+        // 重新开始游戏
+        function restartGame() {
+            // 重置游戏状态
+            gameState = {
+                currentLevel: 0,
+                score: 0,
+                level1: {
+                    hits: 0,
+                    perfect: 0,
+                    timeLeft: 30,
+                    combo: 0,
+                    timer: null,
+                    isPlaying: false
+                },
+                level2: {
+                    temperature: 20,
+                    currentStep: 1,
+                    stepsCompleted: [],
+                    timer: null
+                },
+                level3: {
+                    selected: [],
+                    correctPairs: 0,
+                    attempts: 0,
+                    requiredPairs: 3
+                }
+            };
+            
+            // 重置UI
+            document.getElementById('hitCount').textContent = '0';
+            document.getElementById('perfectCount').textContent = '0';
+            document.getElementById('timer1').textContent = '30';
+            document.getElementById('timer1').classList.remove('warning');
+            document.querySelectorAll('.meat-icon').forEach(el => el.classList.remove('done'));
+            
+            document.getElementById('gaugeNeedle').style.left = '20%';
+            document.querySelectorAll('.instruction-step').forEach(el => {
+                el.classList.remove('active', 'done');
+                el.querySelector('.step-number').classList.remove('done');
+            });
+            document.getElementById('cookStep1').classList.add('active');
+            document.getElementById('nextStepBtn').textContent = '完成此步';
+            document.getElementById('nextStepBtn').disabled = true;
+            
+            document.getElementById('correctPairs').textContent = '0';
+            document.getElementById('totalAttempts').textContent = '0';
+            document.getElementById('checkPairingBtn').classList.remove('hidden');
+            document.getElementById('finishGameBtn').classList.add('hidden');
+            resetSelection();
+            
+            // 隐藏结果，显示开始界面
+            document.getElementById('resultScreen').classList.add('hidden');
+            document.getElementById('startScreen').classList.remove('hidden');
+            
+            // 重置进度条
+            for (let i = 1; i <= 3; i++) {
+                const circle = document.getElementById(`step${i}`);
+                const name = circle.nextElementSibling;
+                circle.classList.remove('active', 'completed');
+                name.classList.remove('active');
+                circle.textContent = i;
+            }
+            document.getElementById('step1').classList.add('active');
+            document.getElementById('step1').nextElementSibling.classList.add('active');
+        }
+
+        // 分享结果
+        function shareResult() {
+            const text = `我在「潮汕牛肉丸传奇」游戏中获得了 ${gameState.score} 分，评级：${document.getElementById('rank').textContent}！快来一起体验非遗美食的魅力吧！🥩🍡`;
+            alert('复制以下内容分享到社交媒体：\n\n' + text);
+        }
+
+        // 初始化
+        init();
+    </script>
+</body>
+</html>

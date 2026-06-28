@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creative Proposal Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f5f5f5;
+        }
+        nav {
+            background: white;
+            padding: 16px 32px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 20px;
+            font-weight: bold;
+            color: #4F46E5;
+        }
+        .hero {
+            padding: 120px 32px 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #EEF2FF 0%, #FFFFFF 100%);
+        }
+        .hero h1 {
+            font-size: 40px;
+            color: #1F2937;
+            margin-bottom: 16px;
+        }
+        .hero p {
+            font-size: 18px;
+            color: #6B7280;
+            max-width: 600px;
+            margin: 0 auto 32px;
+        }
+        .btn {
+            padding: 12px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.2s;
+        }
+        .btn-primary {
+            background: #4F46E5;
+            color: white;
+        }
+        .btn-primary:hover {
+            background: #3730A3;
+            transform: translateY(-2px);
+        }
+        .features {
+            padding: 60px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .features h2 {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 48px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+        .card {
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: all 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+        .card-icon {
+            font-size: 36px;
+            margin-bottom: 16px;
+        }
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 8px;
+            color: #1F2937;
+        }
+        .card p {
+            color: #6B7280;
+            font-size: 14px;
+        }
+        .showcase {
+            padding: 60px 32px;
+            background: white;
+        }
+        .showcase-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .showcase img {
+            width: 100%;
+            border-radius: 12px;
+        }
+        .stats {
+            padding: 60px 32px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+        }
+        .stat-card {
+            text-align: center;
+            background: white;
+            padding: 32px;
+            border-radius: 12px;
+        }
+        .stat-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #4F46E5;
+        }
+        .stat-label {
+            font-size: 14px;
+            color: #6B7280;
+            margin-top: 4px;
+        }
+        footer {
+            background: #1F2937;
+            color: white;
+            padding: 40px 32px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 28px;
+            }
+            .showcase-content {
+                grid-template-columns: 1fr;
+            }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">✨ Creative Proposal</div>
+    </nav>
+    
+    <section class="hero">
+        <h1>Build Exceptional Digital Experiences</h1>
+        <p>Our creative solutions combine cutting-edge technology with innovative design, providing comprehensive solutions to drive business growth and user experience enhancement.</p>
+        <a href="#features" class="btn btn-primary">Explore Now</a>
+    </section>
+    
+    <section class="features" id="features">
+        <h2>Core Features</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Smart Analytics</h3>
+                <p>AI-powered data analysis engine that automatically identifies business trends and provides visual reports.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🎯</div>
+                <h3>Personalization</h3>
+                <p>Deliver personalized recommendations and customized services based on user behavior and preferences.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Security</h3>
+                <p>Enterprise-grade security architecture with end-to-end encryption and multi-layer protection.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Fast Deployment</h3>
+                <p>One-click deployment supporting cloud and local environments for quick launch.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">👥</div>
+                <h3>Real-time Collaboration</h3>
+                <p>Multi-user real-time collaborative editing with version control.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Mobile Ready</h3>
+                <p>Perfectly adapted for various mobile devices with consistent experience across platforms.</p>
+            </div>
+        </div>
+    </section>
+    
+    <section class="showcase">
+        <div class="showcase-content">
+            <div>
+                <h3>Intuitive User Interface</h3>
+                <p>We focus on every detail to create a clean and intuitive user interface. Modern design language allows users to get started easily and quickly find the features they need.</p>
+            </div>
+            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20clean%20dashboard%20interface%20design%20with%20charts%20minimal%20style%20blue%20theme&image_size=landscape_16_9" alt="Product Interface">
+        </div>
+    </section>
+    
+    <section class="stats">
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value">10K+</div>
+                <div class="stat-label">Active Users</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">99.9%</div>
+                <div class="stat-label">Uptime</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">500ms</div>
+                <div class="stat-label">Response Time</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value">24/7</div>
+                <div class="stat-label">Support</div>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <p>&copy; 2026 Creative Proposal. All rights reserved.</p>
+    </footer>
+</body>
+</html>
